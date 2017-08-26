@@ -4,5 +4,10 @@
 
 (deftest a-test
   (testing "Givin 1 return I"
-    (is (= (-main 1) "I"))
-))
+    (is (= (-main 1) "I"))))
+
+
+(deftest a-test2
+  (testing "Givin 2 return II"
+    (is (= (-main 2) "II"))))
+
