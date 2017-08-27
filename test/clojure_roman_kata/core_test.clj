@@ -13,3 +13,7 @@
 (deftest a-test3
   (testing "Givin 5 return V"
     (is (= (-main 5) "V"))))
+
+(deftest a-test4
+  (testing "Givin 5 return V"
+    (is (= (-main 6) "VI"))))
