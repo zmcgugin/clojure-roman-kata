@@ -1,8 +1,14 @@
 (ns clojure-roman-kata.core)
 
 (def symbolMap (sorted-map
-  5 "V"
-  1 "I"
+  100 "C"
+  50  "L"
+  40  "XL"
+  10  "X"
+  9   "IX"
+  5   "V"
+  4   "IV"
+  1   "I"
 ))
 
 (defn getKeyForBiggestMatch [value]
@@ -23,7 +29,6 @@
     (reset! finalString (apply str @finalString partialS)))
   @finalString
 )
-
 
 (defn -main "Main function thingy" [value]
   (convert value)
