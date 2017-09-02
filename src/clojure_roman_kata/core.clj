@@ -1,6 +1,6 @@
 (ns clojure-roman-kata.core)
 
-(def symbolMap (sorted-map
+(def numeralLookup (sorted-map
   100 "C"
   50  "L"
   40  "XL"
@@ -11,31 +11,23 @@
   1   "I"
 ))
 
-(defn getKeyForBiggestMatch [value]
-  (first (filter #(<= % @value) (reverse(keys symbolMap))))
-)
+(defn getLargestMatch [value]
+  (first (filter #(<= % value) (reverse(keys numeralLookup)))))
 
-(defn searchForHighestMatch [remaining]
-  (def biggest (getKeyForBiggestMatch remaining))
-  (reset! remaining (- @remaining biggest))
-  (get symbolMap biggest)
-)
+(defn concat-symbol [current key]
+  (apply str current (get numeralLookup key)))
 
-(defn convert [value]
-  (def finalString (atom ""))
-  (def remaining (atom value))
-  (while (> @remaining 0)
-    (def partialS (apply str (searchForHighestMatch remaining)))
-    (reset! finalString (apply str @finalString partialS)))
-  @finalString
+(defn convert [numerals value]
+  (def largestMatch (getLargestMatch value))
+  (def currentSymbol (concat-symbol numerals largestMatch))
+  (def remaining (- value largestMatch))
+  (if (> remaining 0)
+    (convert currentSymbol remaining) currentSymbol)
 )
 
 (defn -main "Main function thingy" [value]
-  (convert value)
+  (convert "" value)
 )
-
-
-
 
 
 
